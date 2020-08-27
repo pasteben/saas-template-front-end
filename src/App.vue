@@ -1,19 +1,32 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div v-if="!$route.meta.requiresAuth">
+      <Nav />
+      <router-view />
+      <Footer />
     </div>
-    <router-view />
+    <div v-if="$route.meta.requiresAuth">
+      <AuthNav>
+        <router-view />
+      </AuthNav>
+    </div>
   </div>
 </template>
 
-<style lang="stylus">
-#app
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
-</style>
+<script>
+import Nav from "./views/public/Nav";
+import AuthNav from "./views/auth/AuthNav";
+import Footer from "./views/public/Footer";
+import { mapGetters } from "vuex";
+export default {
+  name: "App",
+  components: {
+    Nav,
+    AuthNav,
+    Footer
+  },
+  computed: {
+    ...mapGetters("user", ["isLoggedIn"])
+  }
+};
+</script>
