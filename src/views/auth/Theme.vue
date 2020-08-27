@@ -38,8 +38,26 @@
         <div class="my-2">Selected: {{ searchSelect }}</div>
       </div>
       <div class="mt-4">
-        <theme-button color="purple">Submit</theme-button>
+        <theme-button>Submit</theme-button>
       </div>
+    </card>
+    <card class="my-4" heading="Edit Theme">
+      {{ themeColor }}
+      <search-select
+        v-model="themeColor"
+        :items="colors"
+        placeholder=""
+        label="Search Select"
+        help-text="Select the color for the application"
+      />
+      {{ themeShadow }}
+      <search-select
+        v-model="themeShadow"
+        :items="shadows"
+        placeholder=""
+        label="Search Select"
+        help-text="Select the color for the application"
+      />
     </card>
     <div class="my-4">
       <badge color="teal">Badge</badge>
@@ -76,9 +94,7 @@
       </card>
     </div>
     <div class="my-4">
-      <theme-button color="purple" @click="openModal = true"
-        >Open Modal</theme-button
-      >
+      <theme-button @click="openModal = true">Open Modal</theme-button>
     </div>
     <modal v-model="openModal" heading="Test">
       <template v-slot:heading>
@@ -119,7 +135,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Card from "../../components/Card";
 import Badge from "../../components/Badge";
 import ThemeButton from "../../components/ThemeButton";
@@ -148,10 +164,35 @@ export default {
   },
   data() {
     return {
+      themeColor: "",
+      themeShadow: "shadow",
       toggleState: true,
       openModal: false,
       inputText: "",
       searchSelect: "",
+      colors: [
+        "gray",
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "teal",
+        "blue",
+        "indigo",
+        "purple",
+        "pink"
+      ],
+      shadows: [
+        "shadow-none",
+        "shadow-xs",
+        "shadow-sm",
+        "shadow",
+        "shadow-md",
+        "shadow-lg",
+        "shadow-xl",
+        "shadow-2xl",
+        "shadow-inner"
+      ],
       questionandAnswers: [
         {
           key: "What's the best thing about Switzerland?",
@@ -201,6 +242,17 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["user", "isLoggedIn"])
+  },
+  methods: {
+    ...mapActions("theme", ["setColor", "setShadow"])
+  },
+  watch: {
+    themeColor(val) {
+      this.setColor(val);
+    },
+    themeShadow(val) {
+      this.setShadow(val);
+    }
   }
 };
 </script>

@@ -26,7 +26,7 @@
       class="absolute mt-1 w-full rounded-md bg-white shadow-lg overflow-hidden"
     >
       <ul
-        v-for="item in filtered().slice(0, 5)"
+        v-for="item in filtered().slice(0, 10)"
         :key="item"
         tabindex="-1"
         role="listbox"

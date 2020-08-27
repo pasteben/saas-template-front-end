@@ -1,5 +1,8 @@
 <template>
-  <div class="rounded-lg bg-white overflow-hidden shadow">
+  <div
+    class="rounded-lg bg-white overflow-hidden"
+    :class="[shadow ? shadow : '']"
+  >
     <div class="px-4 py-5 sm:p-6">
       <dl>
         <dt class="text-base leading-6 font-normal text-gray-900">
@@ -68,14 +71,10 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Stats",
   props: {
-    color: {
-      type: String,
-      required: false,
-      default: "indigo"
-    },
     heading: {
       type: String,
       required: true,
@@ -93,6 +92,12 @@ export default {
       type: Number,
       required: false
     }
+  },
+  computed: {
+    ...mapGetters("theme", ["color", "shadow"])
+  },
+  methods: {
+    ...mapActions("theme", ["setColor", "setShadow"])
   }
 };
 </script>

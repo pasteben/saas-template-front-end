@@ -1,7 +1,7 @@
 <template>
   <div
-    class="bg-white rounded-lg shadow"
-    :class="[padding ? '' : 'overflow-hidden']"
+    class="bg-white rounded-lg"
+    :class="[padding ? '' : 'overflow-hidden', shadow ? shadow : '']"
   >
     <div class="px-4 py-2">
       <div
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Card",
   props: {
@@ -54,6 +55,12 @@ export default {
       required: false,
       default: true
     }
+  },
+  computed: {
+    ...mapGetters("theme", ["color", "shadow"])
+  },
+  methods: {
+    ...mapActions("theme", ["setColor", "setShadow"])
   }
 };
 </script>
