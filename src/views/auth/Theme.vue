@@ -128,9 +128,6 @@
         </span>
       </template>
     </modal>
-    <card heading="Avatar">
-      <avatar name="Derek Schmitt"></avatar>
-    </card>
   </div>
 </template>
 
@@ -141,7 +138,6 @@ import Badge from "../../components/Badge";
 import ThemeButton from "../../components/ThemeButton";
 import Stats from "../../components/Stats";
 import DescriptionList from "../../components/DescriptionList";
-import Avatar from "../../components/Avatar";
 import Modal from "../../components/Modal";
 import Accordion from "../../components/Accordion";
 import Toggle from "../../components/form/Toggle";
@@ -159,8 +155,7 @@ export default {
     FormInput,
     SearchSelect,
     Accordion,
-    Modal,
-    Avatar
+    Modal
   },
   data() {
     return {
