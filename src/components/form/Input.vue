@@ -18,6 +18,7 @@
         :placeholder="placeholder"
         v-model="value"
         :type="type"
+        :required="required"
         aria-invalid="true"
         aria-describedby="email-error"
       />
@@ -37,6 +38,7 @@
 
 <script>
 //TODO Fix the aria-invalid="true" and aria-describedby="email-error" lines
+import { mapGetters } from "vuex";
 export default {
   name: "Input",
   props: {
@@ -61,6 +63,11 @@ export default {
       required: false,
       default: "text"
     },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     helpText: {
       type: String,
       required: false
@@ -74,7 +81,8 @@ export default {
       set(value) {
         this.$emit("update:modelValue", value);
       }
-    }
+    },
+    ...mapGetters("theme", ["border"])
   }
 };
 </script>

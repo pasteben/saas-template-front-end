@@ -1,9 +1,9 @@
 <template>
   <div
-    class="bg-white rounded-lg"
-    :class="[padding ? '' : 'overflow-hidden', shadow ? shadow : '']"
+    class="bg-white"
+    :class="[padding ? '' : 'overflow-hidden', shadow ? shadow : '', rounded]"
   >
-    <div class="px-4 py-2">
+    <div class="px-4 py-2" v-if="showHeading">
       <div
         class="-ml-4 -mt-2 flex justify-between items-center flex-wrap sm:flex-no-wrap"
       >
@@ -15,17 +15,6 @@
             {{ subheading }}
           </p>
         </div>
-        <!-- <div class="ml-4 mt-4 flex-shrink-0">
-          <span class="inline-flex rounded-md shadow-sm">
-            <slot name="action"></slot>
-            <button
-              type="button"
-              class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700"
-            >
-              Create new job
-            </button>
-          </span>
-        </div> -->
       </div>
     </div>
     <div
@@ -38,10 +27,15 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "Card",
   props: {
+    showHeading: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
     heading: {
       type: String,
       required: true
@@ -57,10 +51,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("theme", ["color", "shadow"])
-  },
-  methods: {
-    ...mapActions("theme", ["setColor", "setShadow"])
+    ...mapGetters("theme", ["color", "shadow", "rounded"])
   }
 };
 </script>

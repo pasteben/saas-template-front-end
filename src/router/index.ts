@@ -77,6 +77,27 @@ const routes: Array<RouteRecordRaw> = [
     },
     component: () =>
       import(/* webpackChunkName: "settings" */ "../views/auth/Settings.vue")
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    meta: {
+      requiresAuth: true,
+      headingName: "Profile",
+      roles: ["admin"]
+    },
+    component: () =>
+      import(/* webpackChunkName: "settings" */ "../views/auth/Profile.vue")
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "404",
+    meta: {
+      requiresAuth: false,
+      headingName: "Page Not Found"
+    },
+    component: () =>
+      import(/* webpackChunkName: "404" */ "../views/public/404.vue")
   }
 ];
 

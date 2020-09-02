@@ -13,7 +13,7 @@ axios.interceptors.response.use(
   },
   function(error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
-    //Check if the error is an auth error and if so then logout the user out
+    // Check if the error is an auth error and if so then logout the user out
     if (error.response.status == 401) {
       //TODO log the user out via the api and redirect back to login screen. Use the vue router.
       if (!(router.currentRoute.value.name === "login")) {

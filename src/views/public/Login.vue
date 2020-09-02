@@ -17,7 +17,9 @@
         Or
         <a
           href="#"
-          class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+          :class="
+            `font-medium text-${color}-600 hover:text-${color}-500 focus:outline-none focus:underline transition ease-in-out duration-150`
+          "
         >
           start your 14-day free trial
         </a>
@@ -80,11 +82,15 @@
           </div>
 
           <div class="mt-6 flex items-center justify-between">
-            <!-- <div class="flex items-center">
+            <div class="flex items-center">
               <input
                 id="remember_me"
                 type="checkbox"
-                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                name="remember"
+                v-model="remember"
+                :class="
+                  `form-checkbox h-4 w-4 text-${color}-600 transition duration-150 ease-in-out`
+                "
               />
               <label
                 for="remember_me"
@@ -92,12 +98,14 @@
               >
                 Remember me
               </label>
-            </div> -->
+            </div>
 
             <div class="text-sm leading-5">
               <a
                 href="#"
-                class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+                :class="
+                  `font-medium text-${color}-600 hover:text-${color}-500 focus:outline-none focus:underline transition ease-in-out duration-150`
+                "
               >
                 Forgot your password?
               </a>
@@ -108,7 +116,9 @@
             <span class="block w-full rounded-md shadow-sm">
               <button
                 @click="login()"
-                class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                :class="
+                  `w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-${color}-600 hover:bg-${color}-500 focus:outline-none focus:border-${color}-700 focus:shadow-outline-${color} active:bg-${color}-700 transition duration-150 ease-in-out`
+                "
               >
                 Sign in
               </button>
@@ -125,8 +135,7 @@
 
 <script>
 import axios from "axios";
-import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("user");
+import { mapActions, mapGetters } from "vuex";
 import router from "@/router";
 export default {
   data() {
@@ -136,11 +145,15 @@ export default {
       emailErrors: [],
       password: null,
       passwordErrors: [],
-      loginError: false
+      loginError: false,
+      remember: true
     };
   },
+  computed: {
+    ...mapGetters("theme", ["color"])
+  },
   methods: {
-    ...mapActions(["setUser"]),
+    ...mapActions("user", ["setUser"]),
     login() {
       this.validate();
 
@@ -161,7 +174,8 @@ export default {
           axios
             .post(baseUrl + "/login", {
               email: this.email,
-              password: this.password
+              password: this.password,
+              remember: this.remember
             })
             .then(response => {
               console.log(response);

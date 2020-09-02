@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import user from "./modules/user";
 import theme from "./modules/theme";
+import flash from "./modules/flash";
 
 const store = createStore({
   state: {
@@ -11,7 +12,8 @@ const store = createStore({
   actions: {},
   modules: {
     user: user,
-    theme: theme
+    theme: theme,
+    flash: flash
   },
   devtools: true
 });

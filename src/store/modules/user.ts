@@ -15,7 +15,7 @@ const user = {
   },
   actions: {
     setUser(
-      context: { commit: (arg0: string, arg1: any) => void },
+      context: { commit: (arg0: string, arg1: object) => void },
       user: object
     ) {
       context.commit("setUser", user);

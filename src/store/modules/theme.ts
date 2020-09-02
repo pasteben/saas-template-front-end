@@ -3,7 +3,8 @@ const theme = {
   state: {
     theme: {
       color: "indigo",
-      shadow: "shadow"
+      shadow: "shadow",
+      rounded: "rounded"
     }
   },
   getters: {
@@ -12,20 +13,29 @@ const theme = {
     },
     shadow: (state: { theme: { shadow: string } }) => {
       return state.theme.shadow;
+    },
+    rounded: (state: { theme: { rounded: string } }) => {
+      return state.theme.rounded;
     }
   },
   actions: {
     setColor(
-      context: { commit: (arg0: string, arg1: any) => void },
+      context: { commit: (arg0: string, arg1: string) => void },
       color: string
     ) {
       context.commit("setColor", color);
     },
     setShadow(
-      context: { commit: (arg0: string, arg1: any) => void },
+      context: { commit: (arg0: string, arg1: string) => void },
       shadow: string
     ) {
       context.commit("setShadow", shadow);
+    },
+    setRounded(
+      context: { commit: (arg0: string, arg1: string) => void },
+      rounded: string
+    ) {
+      context.commit("setRounded", rounded);
     }
   },
   mutations: {
@@ -34,6 +44,9 @@ const theme = {
     },
     setShadow(state: { theme: { shadow: string } }, shadow: string) {
       state.theme.shadow = shadow;
+    },
+    setRounded(state: { theme: { rounded: string } }, rounded: string) {
+      state.theme.rounded = rounded;
     }
   },
   modules: {}

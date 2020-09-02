@@ -42,21 +42,29 @@
       </div>
     </card>
     <card class="my-4" heading="Edit Theme">
-      {{ themeColor }}
       <search-select
+        class="my-4"
         v-model="themeColor"
         :items="colors"
         placeholder=""
-        label="Search Select"
+        label="Color"
         help-text="Select the color for the application"
       />
-      {{ themeShadow }}
       <search-select
+        class="my-4"
         v-model="themeShadow"
         :items="shadows"
         placeholder=""
-        label="Search Select"
+        label="Shadow"
         help-text="Select the color for the application"
+      />
+      <search-select
+        class="my-4"
+        v-model="themeRounded"
+        :items="rounded"
+        placeholder=""
+        label="Rounded"
+        help-text="Select the border shape"
       />
     </card>
     <div class="my-4">
@@ -135,7 +143,7 @@
 import { mapGetters, mapActions } from "vuex";
 import Card from "../../components/Card";
 import Badge from "../../components/Badge";
-import ThemeButton from "../../components/ThemeButton";
+import ThemeButton from "../../components/form/Button";
 import Stats from "../../components/Stats";
 import DescriptionList from "../../components/DescriptionList";
 import Modal from "../../components/Modal";
@@ -160,7 +168,8 @@ export default {
   data() {
     return {
       themeColor: "",
-      themeShadow: "shadow",
+      themeShadow: "",
+      themeRounded: "",
       toggleState: true,
       openModal: false,
       inputText: "",
@@ -187,6 +196,13 @@ export default {
         "shadow-xl",
         "shadow-2xl",
         "shadow-inner"
+      ],
+      rounded: [
+        "rounded-none",
+        "rounded-sm",
+        "rounded",
+        "rounded-md",
+        "rounded-lg"
       ],
       questionandAnswers: [
         {
@@ -239,7 +255,7 @@ export default {
     ...mapGetters("user", ["user", "isLoggedIn"])
   },
   methods: {
-    ...mapActions("theme", ["setColor", "setShadow"])
+    ...mapActions("theme", ["setColor", "setShadow", "setRounded"])
   },
   watch: {
     themeColor(val) {
@@ -247,6 +263,9 @@ export default {
     },
     themeShadow(val) {
       this.setShadow(val);
+    },
+    themeRounded(val) {
+      this.setRounded(val);
     }
   }
 };

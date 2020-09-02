@@ -5,7 +5,7 @@
       class="block text-sm font-medium leading-5 text-gray-700"
       >{{ label }}</label
     >
-    <div class="mt-1 relative rounded-md shadow-sm">
+    <div :class="`mt-1 relative ${rounded} shadow-sm`">
       <input
         v-model="input"
         :id="label"
@@ -23,7 +23,9 @@
 
     <div
       v-if="dropdownOpen"
-      class="absolute mt-1 w-full rounded-md bg-white shadow-lg overflow-hidden"
+      :class="
+        `absolute mt-1 w-full ${rounded} bg-white shadow-lg overflow-hidden z-10`
+      "
     >
       <ul
         v-for="item in filtered().slice(0, 10)"
@@ -37,14 +39,17 @@
         <!--
           Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
 
-          Highlighted: "text-white bg-indigo-600", Not Highlighted: "text-gray-900"
+          Highlighted: "text-white bg-${color}-600", Not Highlighted: "text-gray-900"
         -->
         <li
           @click="select(item)"
-          :class="[item === selectedItem ? 'text-gray-900 font-bold' : '']"
+          :class="[
+            item === selectedItem ? 'text-gray-900 font-bold' : '',
+            `hover:bg-${color}-600`
+          ]"
           id="listbox-option-0"
           role="option"
-          class="select-none relative py-2 pl-3 pr-9 hover:text-white hover:bg-indigo-600 text-gray-900 cursor-pointer"
+          class="select-none relative py-2 pl-3 pr-9 hover:text-white text-gray-900 cursor-pointer"
         >
           <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
           <span class="font-normal block truncate">
@@ -54,7 +59,7 @@
           <!--
             Checkmark, only display for selected option.
 
-            Highlighted: "text-white", Not Highlighted: "text-indigo-600"
+            Highlighted: "text-white", Not Highlighted: "text-${color}-600"
           -->
           <span
             v-if="item === selectedItem"
@@ -88,6 +93,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -160,6 +166,9 @@ export default {
         this.dropdownOpen = false;
       }, 200);
     }
+  },
+  computed: {
+    ...mapGetters("theme", ["color", "rounded"])
   }
 };
 </script>

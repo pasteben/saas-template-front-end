@@ -7,10 +7,10 @@
     :aria-checked="value"
     class="group relative inline-flex items-center justify-center flex-shrink-0 h-5 w-10 cursor-pointer focus:outline-none"
   >
-    <!-- On: "bg-indigo-600", Off: "bg-gray-200" -->
+    <!-- On: "bg-${color}-600", Off: "bg-gray-200" -->
     <span
       aria-hidden="true"
-      :class="value ? 'bg-indigo-600' : 'bg-gray-200'"
+      :class="value ? `bg-${color}-600` : 'bg-gray-200'"
       class="bg-gray-200 absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200"
     ></span>
     <!-- On: "translate-x-5", Off: "translate-x-0" -->
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Toggle",
   props: ["modelValue"],
@@ -34,7 +35,8 @@ export default {
       set(value) {
         this.$emit("update:modelValue", value);
       }
-    }
+    },
+    ...mapGetters("theme", ["color"])
   }
 };
 </script>

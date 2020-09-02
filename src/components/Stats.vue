@@ -1,7 +1,7 @@
 <template>
   <div
-    class="rounded-lg bg-white overflow-hidden"
-    :class="[shadow ? shadow : '']"
+    class="bg-white overflow-hidden"
+    :class="[shadow ? shadow : '', rounded]"
   >
     <div class="px-4 py-5 sm:p-6">
       <dl>
@@ -94,7 +94,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("theme", ["color", "shadow"])
+    ...mapGetters("theme", ["color", "shadow", "rounded"])
   },
   methods: {
     ...mapActions("theme", ["setColor", "setShadow"])

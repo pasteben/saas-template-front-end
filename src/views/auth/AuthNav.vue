@@ -23,7 +23,10 @@
         -->
 
           <div class="fixed inset-0">
-            <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
+            <div
+              @click="showMobileNav = !showMobileNav"
+              class="absolute inset-0 bg-gray-600 opacity-75"
+            ></div>
           </div>
           <!--
           Off-canvas menu, show/hide based on off-canvas menu state.
@@ -86,7 +89,7 @@
                       <div
                         :class="[
                           isActive
-                            ? 'bg-gray-900 text-white borded border-l-4 border-indigo-600'
+                            ? `bg-gray-900 text-white borded border-l-4 border-${color}-600`
                             : 'borded border-l-4 border-gray-800'
                         ]"
                         class="group flex items-center px-4 py-2 text-base leading-5 font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
@@ -131,7 +134,7 @@
                   <div
                     :class="[
                       isActive
-                        ? 'bg-gray-900 text-white borded border-l-4 border-indigo-600'
+                        ? `bg-gray-900 text-white borded border-l-4 border-${color}-600`
                         : 'borded border-l-4 border-gray-800'
                     ]"
                     class="group flex items-center px-4 py-2 text-base leading-5 font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
@@ -175,7 +178,7 @@
         <div class="flex-1 px-4 flex justify-between">
           <div class="flex-1 items-center flex">
             <div class="text-xl font-semibold text-gray-900">
-              {{ $route.meta.headingName }}
+              <!-- {{ $route.meta.headingName }} -->
             </div>
             <!-- <form class="w-full flex md:ml-0" action="#" method="GET">
             <label for="search_field" class="sr-only">Search</label>
@@ -191,62 +194,47 @@
           </div>
           <div class="ml-4 flex items-center md:ml-6">
             <!-- Profile dropdown -->
-            <div class="ml-3 relative">
+            <dropdown>
               <div>
                 <avatar
                   class="cursor-pointer"
                   :name="user.name"
-                  @click="profileDropdown = !profileDropdown"
                   id="user-menu"
                   aria-label="User menu"
                   aria-haspopup="true"
                 ></avatar>
               </div>
-              <!--
-              Profile dropdown panel, show/hide based on dropdown state.
 
-              Entering: "transition ease-out duration-100"
-                From: "transform opacity-0 scale-95"
-                To: "transform opacity-100 scale-100"
-              Leaving: "transition ease-in duration-75"
-                From: "transform opacity-100 scale-100"
-                To: "transform opacity-0 scale-95"
-            -->
-              <transition
-                enter-active-class="transition ease-out duration-200 transform"
-                enter-from-class="transform opacity-0 scale-95"
-                enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-out duration-200 transform"
-                leave-from-class="transform opacity-100 scale-100"
-                leave-to-class="transform opacity-0 scale-95"
-              >
+              <template v-slot:content>
                 <div
-                  v-if="profileDropdown"
-                  class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+                  class="py-1 rounded-md bg-white shadow-xs"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="user-menu"
                 >
-                  <div
-                    class="py-1 rounded-md bg-white shadow-xs"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="user-menu"
+                  <router-link
+                    :to="{ name: 'settings' }"
+                    class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
+                    role="menuitem"
+                    >Settings</router-link
                   >
-                    <router-link
-                      :to="{ name: 'settings' }"
-                      class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                      role="menuitem"
-                      >Settings</router-link
-                    >
 
-                    <a
-                      @click="logout()"
-                      class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                      role="menuitem"
-                      >Logout</a
-                    >
-                  </div>
+                  <router-link
+                    :to="{ name: 'profile' }"
+                    class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
+                    role="menuitem"
+                    >Profile</router-link
+                  >
+
+                  <a
+                    @click="logout()"
+                    class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
+                    role="menuitem"
+                    >Logout</a
+                  >
                 </div>
-              </transition>
-            </div>
+              </template>
+            </dropdown>
           </div>
         </div>
       </div>
@@ -256,11 +244,26 @@
         tabindex="0"
       >
         <div class="pt-2 pb-6 md:py-6">
+          <div
+            class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end"
+          >
+            <div class="mt-16 w-full">
+              <div
+                v-for="flash in flashes"
+                :key="flash"
+                class="flex sm:justify-end justify-center"
+              >
+                <flash
+                  :status="flash.status"
+                  :message="flash.message"
+                  :headline="flash.headline"
+                ></flash>
+              </div>
+            </div>
+          </div>
           <div class="mx-auto px-4 sm:px-6 md:px-10">
             <!-- Replace with your content -->
-            <div class="">
-              <slot></slot>
-            </div>
+            <slot></slot>
             <!-- /End replace -->
           </div>
         </div>
@@ -272,15 +275,19 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Avatar from "../../components/Avatar";
+import Dropdown from "../../components/Dropdown";
+import Flash from "../../components/Flash";
 export default {
   name: "AuthNav",
   components: {
-    Avatar
+    Avatar,
+    Dropdown,
+    Flash
   },
   data() {
     return {
-      profileDropdown: false,
       showMobileNav: false,
+      flashes: [],
       routes: [
         {
           title: "Dashboard",
@@ -301,7 +308,25 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("user", ["isLoggedIn", "user"])
+    ...mapGetters("user", ["isLoggedIn", "user"]),
+    ...mapGetters("theme", ["color"]),
+    ...mapGetters("flash", ["flash"])
+  },
+  watch: {
+    flash: {
+      //Watch the slash vuex state to display flash messages
+      deep: true,
+      handler(val) {
+        if (val.headline) {
+          //Check to see if the headline has been set. Ressetting vuex the state removes the headline so no need to display a blank flash
+          this.flashes.unshift({
+            status: val.status,
+            message: val.message,
+            headline: val.headline
+          });
+        }
+      }
+    }
   },
   methods: {
     ...mapActions("user", ["logout"])
