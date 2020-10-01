@@ -12,7 +12,7 @@
 
 <script>
 // eslint-disable-next-line
-const stripe = Stripe('pk_test_1tt1nRERgldgJBookN2o4FKU00DW0LerQy');
+const stripe = Stripe(process.env.STRIPE_PUBLIC_TOKEN);
 const elements = stripe.elements();
 let card = undefined;
 card = elements.create("card");
