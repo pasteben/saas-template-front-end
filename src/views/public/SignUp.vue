@@ -339,6 +339,7 @@ import ThemeButton from "../../components/form/Button";
 import CreditCard from "../../components/form/CreditCard";
 import router from '@/router';
 export default {
+  name: "SignUp",
   components: {
     Toggle,
     Card,

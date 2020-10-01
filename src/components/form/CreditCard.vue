@@ -11,13 +11,15 @@
 </template>
 
 <script>
-// eslint-disable-next-line
-const stripe = Stripe(process.env.STRIPE_PUBLIC_TOKEN);
-const elements = stripe.elements();
-let card = undefined;
-card = elements.create("card");
 export default {
   emits: ["card-error", "card-success"],
+  data() {
+    return {
+      stripe: null,
+      ellements: null,
+      card: null
+    };
+  },
   props: {
     submit: {
       type: Boolean,
@@ -25,7 +27,11 @@ export default {
     }
   },
   mounted() {
-    card.mount(this.$refs.card);
+    // eslint-disable-next-line
+    this.stripe = Stripe(process.env.VUE_APP_STRIPE_PUBLIC_TOKEN);
+    this.elements = this.stripe.elements();
+    this.card = this.elements.create("card");
+    this.card.mount(this.$refs.card);
   },
   watch: {
     submit(newState) {
@@ -36,7 +42,7 @@ export default {
   },
   methods: {
     submitCard() {
-      stripe.createPaymentMethod("card", card).then(result => {
+      this.stripe.createPaymentMethod("card", this.card).then(result => {
         if (result.error) {
           this.$emit("card-error", result.error);
           console.log(result.error);

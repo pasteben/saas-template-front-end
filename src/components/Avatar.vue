@@ -20,11 +20,13 @@ export default {
   computed: {
     initals() {
       return this.name
-        .split(" ")
-        .map(word => {
-          return word[0];
-        })
-        .join("");
+        ? this.name
+            .split(" ")
+            .map(word => {
+              return word[0];
+            })
+            .join("")
+        : "";
     }
   }
 };
