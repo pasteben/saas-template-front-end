@@ -3,8 +3,8 @@ const theme = {
   state: {
     theme: {
       color: "indigo",
-      shadow: "shadow",
-      rounded: "rounded"
+      shadow: "shadow-md",
+      rounded: "rounded-lg"
     }
   },
   getters: {

@@ -23,13 +23,10 @@ export default {
     };
   },
   created() {
-    this.$http.get("/flash").then(response => {
-      this.flash({
-        status: "warning",
-        message: "This api response alert",
-        headline: "Success"
-      });
-      //console.log(response);
+    this.flash({
+      status: "warning",
+      message: "This api response alert",
+      headline: "Success"
     });
   },
   methods: {

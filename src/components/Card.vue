@@ -18,8 +18,11 @@
       </div>
     </div>
     <div
-      class="text-gray-600 border-t border-gray-200"
-      :class="[padding ? 'p-4' : '']"
+      class="text-gray-600"
+      :class="[
+        padding ? 'p-4' : '',
+        showHeading ? 'border-t border-gray-200' : ''
+      ]"
     >
       <slot></slot>
     </div>
@@ -38,7 +41,7 @@ export default {
     },
     heading: {
       type: String,
-      required: true
+      required: false
     },
     subheading: {
       type: String,

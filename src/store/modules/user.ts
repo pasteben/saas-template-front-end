@@ -29,8 +29,8 @@ const user = {
       state.user = user;
     },
     logout(state: { user: {} }) {
+      router.push({ name: "login" }); //TODO Make sure this works
       state.user = {};
-      router.push({ name: "login" });
     }
   },
   modules: {}

@@ -89,7 +89,7 @@
       <div
         class="mt-6 sm:mt-5 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5"
       >
-        <theme-button>Save</theme-button>
+        <theme-button @click="save()">Save</theme-button>
       </div>
     </card>
   </div>
@@ -108,6 +108,18 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["user"])
+  },
+  methods: {
+    save() {
+      this.$http
+        .patch("/user", {
+          name: this.user.name,
+          email: this.user.email
+        })
+        .then(response => {
+          console.log(response);
+        });
+    }
   }
 };
 </script>

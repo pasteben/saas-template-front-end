@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8"
+    class="bg-gray-50 flex flex-col justify-center py-24 px-4 sm:px-6 lg:px-8"
   >
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <img
@@ -28,56 +28,32 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow rounded-lg sm:px-10">
-        <form v-on:submit.prevent>
-          <div>
-            <label
-              for="email"
-              class="block text-sm font-medium leading-5 text-gray-700"
-            >
-              Email address
-            </label>
-            <div class="mt-1 rounded-md shadow-sm">
-              <input
-                id="email"
-                type="email"
-                required
-                v-model="email"
-                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                :class="emailErrors.length ? 'border border-red-500' : ''"
-              />
-            </div>
-            <div>
-              <div v-for="error in emailErrors" :key="error">
-                <span class="text-base leading-6 text-red-500">{{
-                  error
-                }}</span>
-              </div>
+        <form>
+          <div class="">
+            <theme-input
+              id="email"
+              name="email"
+              type="email"
+              label="Email"
+              :required="true"
+              v-model="email"
+            />
+            <div v-for="error in emailErrors" :key="error">
+              <span class="text-sm leading-6 text-red-500">{{ error }}</span>
             </div>
           </div>
 
           <div class="mt-6">
-            <label
-              for="password"
-              class="block text-sm font-medium leading-5 text-gray-700"
-            >
-              Password
-            </label>
-            <div class="mt-1 rounded-md shadow-sm">
-              <input
-                id="password"
-                type="password"
-                required
-                v-model="password"
-                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                :class="passwordErrors.length ? 'border border-red-500' : ''"
-              />
-            </div>
-            <div>
-              <div v-for="error in passwordErrors" :key="error">
-                <span class="text-base leading-6 text-red-500">{{
-                  error
-                }}</span>
-              </div>
+            <theme-input
+              id="password"
+              name="password"
+              type="password"
+              label="Password"
+              :required="true"
+              v-model="password"
+            />
+            <div v-for="error in passwordErrors" :key="error">
+              <span class="text-sm leading-6 text-red-500">{{ error }}</span>
             </div>
           </div>
 
@@ -113,16 +89,17 @@
           </div>
 
           <div class="mt-6">
-            <span class="block w-full rounded-md shadow-sm">
-              <button
+            <theme-button @click="login()" :full-width="true">
+              Sign in
+            </theme-button>
+            <!-- <button
                 @click="login()"
                 :class="
                   `w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-${color}-600 hover:bg-${color}-500 focus:outline-none focus:border-${color}-700 focus:shadow-outline-${color} active:bg-${color}-700 transition duration-150 ease-in-out`
                 "
               >
                 Sign in
-              </button>
-            </span>
+              </button> -->
           </div>
           <div v-if="loginError" class="text-base leading-6 text-red-500 mt-2">
             The credientals didnt match our records.
@@ -136,14 +113,20 @@
 <script>
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
+import themeInput from "../../components/form/Input";
+import themeButton from "../../components/form/Button";
 import router from "@/router";
 export default {
+  components: {
+    themeInput,
+    themeButton
+  },
   data() {
     return {
       loading: false,
-      email: null,
+      email: "",
       emailErrors: [],
-      password: null,
+      password: "",
       passwordErrors: [],
       loginError: false,
       remember: true

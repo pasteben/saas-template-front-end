@@ -11,6 +11,9 @@
       publishing software like Aldus PageMaker including versions of Lorem
       Ipsum.
     </card>
+    <card class="my-4" heading="Table" :padding="false">
+      <theme-table :headings="tableHeading" :items="tableItems"></theme-table>
+    </card>
     <card class="my-4" heading="Description list" :padding="false">
       <description-list :items="ListItems" :border="true"></description-list>
     </card>
@@ -22,7 +25,8 @@
         <form-input
           v-model="inputText"
           placeholder="example@gmail.com"
-          label="Input"
+          :rules="['max:255', 'required', 'email']"
+          label="Name"
           help-text="Dont make your password short and easy to guess."
         />
       </div>
@@ -151,6 +155,7 @@ import Accordion from "../../components/Accordion";
 import Toggle from "../../components/form/Toggle";
 import FormInput from "../../components/form/Input";
 import SearchSelect from "../../components/form/SearchSelect";
+import ThemeTable from "../../components/Table";
 export default {
   name: "Theme",
   components: {
@@ -163,7 +168,8 @@ export default {
     FormInput,
     SearchSelect,
     Accordion,
-    Modal
+    Modal,
+    ThemeTable
   },
   data() {
     return {
@@ -174,6 +180,25 @@ export default {
       openModal: false,
       inputText: "",
       searchSelect: "",
+      tableHeading: [
+        {
+          name: "Title",
+          sortable: true
+        },
+        {
+          name: "Author",
+          sortable: true
+        },
+        {
+          name: "Views"
+        }
+      ],
+      tableItems: [
+        ["Intro to CSS", "Adam", "858"],
+        ["A Long and", "Adam", "112"],
+        ["Intro to JavaScript", "Chris", "1,280"],
+        ["Learning SQL", "Derk", "99"]
+      ],
       colors: [
         "gray",
         "red",
