@@ -22,6 +22,9 @@
         </span>
       </div>
     </card>
+    <card class="my-4" heading="Countdown" :padding="false">
+      <countdown class="my-2" :time="new Date(2021, 0, 1)"></countdown>
+    </card>
     <card class="my-4" heading="Table" :padding="false">
       <theme-table :headings="tableHeading" :items="tableItems"></theme-table>
     </card>
@@ -167,6 +170,7 @@ import ThemeTable from "../../components/Table";
 import ProgressSpinner from "../../components/ProgressSpinner";
 import ProgressBar from "../../components/ProgressBar";
 import Ping from "../../components/Ping";
+import Countdown from "../../components/Countdown";
 export default {
   name: "Theme",
   components: {
@@ -183,7 +187,8 @@ export default {
     ThemeTable,
     ProgressSpinner,
     ProgressBar,
-    Ping
+    Ping,
+    Countdown
   },
   data() {
     return {
