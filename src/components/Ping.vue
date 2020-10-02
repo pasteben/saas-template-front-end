@@ -1,25 +1,33 @@
 <template>
   <span
     :class="
-      `inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-${badgeColor}-200 text-${badgeColor}-800`
+      `animate-ping absolute inline-flex h-full w-full rounded-full bg-${pingColor}-400 opacity-75`
     "
-  >
-    <slot></slot>
-  </span>
+  ></span>
+  <span
+    :class="
+      `relative inline-flex rounded-full h-${size} w-${size} bg-${pingColor}-500`
+    "
+  ></span>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "Badge",
+  name: "Ping",
   props: {
+    size: {
+      type: Number,
+      required: false,
+      default: 3
+    },
     color: {
       type: String,
       required: false
     }
   },
   computed: {
-    badgeColor() {
+    pingColor() {
       if (this.color) {
         return this.color;
       } else {

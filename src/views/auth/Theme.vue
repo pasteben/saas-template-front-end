@@ -11,6 +11,16 @@
       publishing software like Aldus PageMaker including versions of Lorem
       Ipsum.
     </card>
+    <card class="my-4" heading="Tools">
+      <badge class="my-2">Badge</badge>
+      <loading-spinner class="my-2" :size="8" />
+      <div class="relative inline-flex my-2">
+        <theme-button>Ping</theme-button>
+        <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+          <ping color="pink" />
+        </span>
+      </div>
+    </card>
     <card class="my-4" heading="Table" :padding="false">
       <theme-table :headings="tableHeading" :items="tableItems"></theme-table>
     </card>
@@ -71,9 +81,6 @@
         help-text="Select the border shape"
       />
     </card>
-    <div class="my-4">
-      <badge color="teal">Badge</badge>
-    </div>
     <div class="flex w-full my-4">
       <stats
         class="m-2 flex-1"
@@ -156,6 +163,8 @@ import Toggle from "../../components/form/Toggle";
 import FormInput from "../../components/form/Input";
 import SearchSelect from "../../components/form/SearchSelect";
 import ThemeTable from "../../components/Table";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import Ping from "../../components/Ping";
 export default {
   name: "Theme",
   components: {
@@ -169,7 +178,9 @@ export default {
     SearchSelect,
     Accordion,
     Modal,
-    ThemeTable
+    ThemeTable,
+    LoadingSpinner,
+    Ping
   },
   data() {
     return {
