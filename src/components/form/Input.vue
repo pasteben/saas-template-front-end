@@ -6,7 +6,7 @@
       class="block text-sm font-medium leading-5 text-gray-700"
       >{{ label }}</label
     >
-    <div class="mt-1 relative rounded-md shadow-sm">
+    <div :class="`mt-1 relative ${rounded} shadow-none`">
       <input
         :id="label"
         :class="[
@@ -135,7 +135,7 @@ export default {
         this.$emit("update:modelValue", value);
       }
     },
-    ...mapGetters("theme", ["border"])
+    ...mapGetters("theme", ["rounded"])
   }
 };
 </script>

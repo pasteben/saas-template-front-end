@@ -23,7 +23,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "Loading Spinner",
+  name: "Progress Spinner",
   props: {
     size: {
       type: Number,

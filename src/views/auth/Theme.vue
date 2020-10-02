@@ -13,7 +13,8 @@
     </card>
     <card class="my-4" heading="Tools">
       <badge class="my-2">Badge</badge>
-      <loading-spinner class="my-2" :size="8" />
+      <progress-spinner class="my-2" :size="8" />
+      <progress-bar class="my-2" :height="4" v-model="progressBarValue" />
       <div class="relative inline-flex my-2">
         <theme-button>Ping</theme-button>
         <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
@@ -163,7 +164,8 @@ import Toggle from "../../components/form/Toggle";
 import FormInput from "../../components/form/Input";
 import SearchSelect from "../../components/form/SearchSelect";
 import ThemeTable from "../../components/Table";
-import LoadingSpinner from "../../components/LoadingSpinner";
+import ProgressSpinner from "../../components/ProgressSpinner";
+import ProgressBar from "../../components/ProgressBar";
 import Ping from "../../components/Ping";
 export default {
   name: "Theme",
@@ -179,7 +181,8 @@ export default {
     Accordion,
     Modal,
     ThemeTable,
-    LoadingSpinner,
+    ProgressSpinner,
+    ProgressBar,
     Ping
   },
   data() {
@@ -191,6 +194,7 @@ export default {
       openModal: false,
       inputText: "",
       searchSelect: "",
+      progressBarValue: 57,
       tableHeading: [
         {
           name: "Title",
@@ -286,6 +290,11 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    setInterval(() => {
+      this.progressBarValue = Math.floor(Math.random() * 101);
+    }, 5000);
   },
   computed: {
     ...mapGetters("user", ["user", "isLoggedIn"])
