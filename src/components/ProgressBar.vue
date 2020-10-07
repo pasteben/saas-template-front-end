@@ -16,7 +16,8 @@ export default {
   props: {
     modelValue: {
       type: Number,
-      required: true
+      required: true,
+      default: 50
     },
     color: {
       type: String,

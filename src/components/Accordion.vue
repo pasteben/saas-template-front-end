@@ -49,14 +49,32 @@ export default {
   name: "Accordion",
   props: {
     items: {
-      type: Object,
-      required: true
+      type: Array,
+      required: true,
+      default: () => {
+        return [
+          {
+            key: "First",
+            value: "Value"
+          },
+          {
+            key: "Second",
+            value: "Value"
+          },
+          {
+            key: "Third",
+            value: "Value"
+          }
+        ];
+      }
     }
   },
   created() {
-    this.items.forEach(item => {
-      item.show = false;
-    });
+    if (this.items.length) {
+      this.items.map(item => {
+        item.show = false;
+      });
+    }
   }
 };
 </script>

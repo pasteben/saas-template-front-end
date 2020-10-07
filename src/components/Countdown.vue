@@ -55,10 +55,15 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Countdown",
+  example: {
+    time: new Date(2021, 0, 1),
+    color: "red"
+  },
   props: {
     time: {
       type: Date,
-      required: true
+      required: true,
+      default: new Date(2021, 0, 1)
     },
     color: {
       type: String,

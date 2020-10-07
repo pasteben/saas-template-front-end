@@ -29,8 +29,28 @@ export default {
   },
   props: {
     items: {
-      type: Object,
-      required: true
+      type: Array,
+      required: true,
+      default: () => {
+        return [
+          {
+            key: "First Item",
+            value: "$1500"
+          },
+          {
+            key: "Second Item",
+            value: "150 Subscribers"
+          },
+          {
+            key: "Third Item",
+            value: "Hail Dale"
+          },
+          {
+            key: "Fourth Item",
+            value: "Number 4 is the best."
+          }
+        ];
+      }
     },
     itemKey: {
       type: String,

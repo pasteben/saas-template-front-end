@@ -24,7 +24,17 @@
         showHeading ? 'border-t border-gray-200' : ''
       ]"
     >
-      <slot></slot>
+      <slot>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mollis
+        justo quis lectus posuere, interdum scelerisque enim tempus. Maecenas
+        molestie vulputate elit non bibendum. Morbi in blandit ante. Phasellus
+        placerat pulvinar tortor vitae tempus. Vestibulum ante ipsum primis in
+        faucibus orci luctus et ultrices posuere cubilia curae; Nulla euismod
+        nisi ut ligula vulputate, at malesuada mauris bibendum. Donec porta ac
+        dui ac ullamcorper. Phasellus commodo porttitor ante, ut porttitor ipsum
+        pulvinar sed. Duis malesuada ipsum quis ornare porttitor. Suspendisse
+        potenti. Integer aliquam leo ac gravida hendrerit.
+      </slot>
     </div>
   </div>
 </template>
@@ -41,7 +51,8 @@ export default {
     },
     heading: {
       type: String,
-      required: false
+      required: false,
+      default: "Heading"
     },
     subheading: {
       type: String,

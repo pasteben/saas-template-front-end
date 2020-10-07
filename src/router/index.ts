@@ -90,6 +90,17 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "settings" */ "../views/auth/Profile.vue")
   },
   {
+    path: "/docs",
+    name: "docs",
+    meta: {
+      requiresAuth: true,
+      headingName: "Docs",
+      roles: ["admin"]
+    },
+    component: () =>
+      import(/* webpackChunkName: "docs" */ "../views/auth/Docs.vue")
+  },
+  {
     path: "/:catchAll(.*)",
     name: "404",
     meta: {

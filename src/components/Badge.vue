@@ -4,7 +4,7 @@
       `inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-${badgeColor}-200 text-${badgeColor}-800`
     "
   >
-    <slot></slot>
+    <slot>Badge</slot>
   </span>
 </template>
 

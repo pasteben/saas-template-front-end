@@ -1,15 +1,38 @@
 <template>
   <div>
+    <card class="my-4" heading="Theme">
+      <search-select
+        class="my-4"
+        v-model="themeColor"
+        :items="colors"
+        placeholder=""
+        label="Color"
+        help-text="Select the color for the application"
+      />
+      <search-select
+        class="my-4"
+        v-model="themeShadow"
+        :items="shadows"
+        placeholder=""
+        label="Shadow"
+        help-text="Select the color for the application"
+      />
+      <search-select
+        class="my-4"
+        v-model="themeRounded"
+        :items="rounded"
+        placeholder=""
+        label="Rounded"
+        help-text="Select the border shape"
+      />
+    </card>
     <card class="my-4" heading="Card" subheading="Some text here">
       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       Lorem Ipsum has been the industry's standard dummy text ever since the
       1500s, when an unknown printer took a galley of type and scrambled it to
       make a type specimen book. It has survived not only five centuries, but
       also the leap into electronic typesetting, remaining essentially
-      unchanged. It was popularised in the 1960s with the release of Letraset
-      sheets containing Lorem Ipsum passages, and more recently with desktop
-      publishing software like Aldus PageMaker including versions of Lorem
-      Ipsum.
+      unchanged.
     </card>
     <card class="my-4" heading="Tools">
       <badge class="my-2">Badge</badge>
@@ -23,7 +46,7 @@
       </div>
     </card>
     <card class="my-4" heading="Countdown" :padding="false">
-      <countdown class="my-2" :time="new Date(2021, 0, 1)"></countdown>
+      <countdown :time="new Date(2021, 0, 1)"></countdown>
     </card>
     <card class="my-4" heading="Table" :padding="false">
       <theme-table :headings="tableHeading" :items="tableItems"></theme-table>
@@ -58,32 +81,6 @@
       <div class="mt-4">
         <theme-button>Submit</theme-button>
       </div>
-    </card>
-    <card class="my-4" heading="Edit Theme">
-      <search-select
-        class="my-4"
-        v-model="themeColor"
-        :items="colors"
-        placeholder=""
-        label="Color"
-        help-text="Select the color for the application"
-      />
-      <search-select
-        class="my-4"
-        v-model="themeShadow"
-        :items="shadows"
-        placeholder=""
-        label="Shadow"
-        help-text="Select the color for the application"
-      />
-      <search-select
-        class="my-4"
-        v-model="themeRounded"
-        :items="rounded"
-        placeholder=""
-        label="Rounded"
-        help-text="Select the border shape"
-      />
     </card>
     <div class="flex w-full my-4">
       <stats
@@ -297,6 +294,7 @@ export default {
     };
   },
   created() {
+    this.test = Card;
     setInterval(() => {
       this.progressBarValue = Math.floor(Math.random() * 101);
     }, 5000);

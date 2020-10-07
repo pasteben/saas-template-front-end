@@ -78,23 +78,13 @@
         <!-- More options... -->
       </ul>
     </div>
-
-    <!-- <div v-if="dropdownOpen" class="absolute w-full z-10 bg-white">
-      <div v-for="item in filtered().slice(0, 5)" :key="item">
-        <div
-          class="p-2 shadow-lg bg-white hover:bg-gray-200 cursor-pointer rounded"
-          @click="select(item)"
-        >
-          {{ itemText ? item[itemText] : item }}
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 export default {
+  name: "Search Select",
   data() {
     return {
       dropdownOpen: false,

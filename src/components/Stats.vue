@@ -82,15 +82,18 @@ export default {
     },
     firstMetric: {
       type: String,
-      required: true
+      required: true,
+      default: "90"
     },
     secondMetric: {
       type: String,
-      required: false
+      required: false,
+      default: "78"
     },
     percentChange: {
       type: Number,
-      required: false
+      required: false,
+      default: 23.56
     }
   },
   computed: {

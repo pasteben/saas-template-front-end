@@ -300,6 +300,11 @@ export default {
           icon: "mdi-format-color-fill"
         },
         {
+          title: "Docs",
+          name: "docs",
+          icon: "mdi-file-document-multiple"
+        },
+        {
           title: "Settings",
           name: "settings",
           icon: "mdi-cog"
