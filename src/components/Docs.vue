@@ -92,6 +92,7 @@
     import Button from './form/Button'
     import FormInput from './form/Input'
     import SearchSelect from './form/SearchSelect'
+    import Breadcrumbs from './Breadcrumbs'
     export default {
         components: {
             Card,
@@ -105,7 +106,8 @@
             Accordion,
             DescriptionList,
             Button,
-            SearchSelect
+            SearchSelect,
+            Breadcrumbs
         },
         props: {
             test: {

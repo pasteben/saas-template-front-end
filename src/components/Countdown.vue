@@ -11,7 +11,7 @@
           Days
         </div>
       </div>
-      <div class="border-r my-5"></div>
+      <div class="border-r my-5 border-gray-200"></div>
       <div class="p-2">
         <div :class="`text-2xl leading-8 font-semibold text-${timerColor}-600`">
           {{ hours }}
@@ -22,7 +22,7 @@
           Hours
         </div>
       </div>
-      <div class="border-r my-5"></div>
+      <div class="border-r my-5  border-gray-200"></div>
       <div class="p-2">
         <div :class="`text-2xl leading-8 font-semibold text-${timerColor}-600`">
           {{ minutes }}
@@ -33,7 +33,7 @@
           Minutes
         </div>
       </div>
-      <div class="border-r my-5"></div>
+      <div class="border-r my-5  border-gray-200"></div>
       <div class="p-2">
         <div :class="`text-2xl leading-8 font-semibold text-${timerColor}-600`">
           {{ seconds }}

@@ -51,6 +51,9 @@
     <card class="my-4" heading="Table" :padding="false">
       <theme-table :headings="tableHeading" :items="tableItems"></theme-table>
     </card>
+    <card class="my-4" heading="Breadcrumbs">
+      <breadcrumbs></breadcrumbs>
+    </card>
     <card class="my-4" heading="Description list" :padding="false">
       <description-list :items="ListItems" :border="true"></description-list>
     </card>
@@ -168,6 +171,7 @@ import ProgressSpinner from "../../components/ProgressSpinner";
 import ProgressBar from "../../components/ProgressBar";
 import Ping from "../../components/Ping";
 import Countdown from "../../components/Countdown";
+import Breadcrumbs from "../../components/Breadcrumbs";
 export default {
   name: "Theme",
   components: {
@@ -185,7 +189,8 @@ export default {
     ProgressSpinner,
     ProgressBar,
     Ping,
-    Countdown
+    Countdown,
+    Breadcrumbs
   },
   data() {
     return {
