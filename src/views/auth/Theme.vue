@@ -26,6 +26,14 @@
         help-text="Select the border shape"
       />
     </card>
+    <card class="my-4" heading="Carts">
+      <chart
+        height="300"
+        type="line"
+        :options="options"
+        :series="series"
+      ></chart>
+    </card>
     <card class="my-4" heading="Card" subheading="Some text here">
       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       Lorem Ipsum has been the industry's standard dummy text ever since the
@@ -49,7 +57,7 @@
       <countdown :time="new Date(2021, 0, 1)"></countdown>
     </card>
     <card class="my-4" heading="Table" :padding="false">
-      <theme-table :headings="tableHeading" :items="tableItems"></theme-table>
+      <data-table :items="tableItems"></data-table>
     </card>
     <card class="my-4" heading="Breadcrumbs">
       <breadcrumbs></breadcrumbs>
@@ -166,12 +174,13 @@ import Accordion from "../../components/Accordion";
 import Toggle from "../../components/form/Toggle";
 import FormInput from "../../components/form/Input";
 import SearchSelect from "../../components/form/SearchSelect";
-import ThemeTable from "../../components/Table";
+import DataTable from "../../components/DataTable";
 import ProgressSpinner from "../../components/ProgressSpinner";
 import ProgressBar from "../../components/ProgressBar";
 import Ping from "../../components/Ping";
 import Countdown from "../../components/Countdown";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import Chart from "../../components/Chart";
 export default {
   name: "Theme",
   components: {
@@ -185,12 +194,13 @@ export default {
     SearchSelect,
     Accordion,
     Modal,
-    ThemeTable,
+    DataTable,
     ProgressSpinner,
     ProgressBar,
     Ping,
     Countdown,
-    Breadcrumbs
+    Breadcrumbs,
+    Chart
   },
   data() {
     return {
@@ -202,24 +212,99 @@ export default {
       inputText: "",
       searchSelect: "",
       progressBarValue: 57,
-      tableHeading: [
-        {
-          name: "Title",
-          sortable: true
+      options: {
+        tooltip: {
+          enabled: true,
+          x: {
+            show: true,
+            format: "hh:mm:ss"
+          }
         },
-        {
-          name: "Author",
-          sortable: true
+        colors: ["#6875f5"],
+        fill: {
+          type: "gradient",
+          gradient: {
+            type: "vertical",
+            opacityFrom: 0.5,
+            opacityTo: 0.1,
+            stops: [0, 100],
+            colorStops: []
+          }
         },
-        {
-          name: "Views"
+        stroke: {
+          show: true,
+          curve: "smooth",
+          width: 2
+        },
+        grid: {
+          yaxis: {
+            lines: {
+              show: false
+            }
+          }
+        },
+        chart: {
+          //id: 'vuechart-example'
+          toolbar: {
+            show: false,
+            theme: "light",
+            tools: {
+              download: false,
+              selection: false,
+              zoom: true,
+              zoomin: true,
+              zoomout: true,
+              pan: true,
+              reset: true,
+              customIcons: []
+            }
+          }
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          labels: {
+            show: true
+          }
+        },
+        yaxis: {
+          show: true,
+          labels: {
+            show: true
+          }
         }
+      },
+      series: [
+        {
+          name: "People",
+          type: "area",
+          data: [30, 40, 45, 50, 49, 60, 70, 91]
+        }
+        // {
+        //   name: 'series-1',
+        //   data: [35, 45, 49, 55, 55, 69, 89, 99]
+        // }
       ],
       tableItems: [
-        ["Intro to CSS", "Adam", "858"],
-        ["A Long and", "Adam", "112"],
-        ["Intro to JavaScript", "Chris", "1,280"],
-        ["Learning SQL", "Derk", "99"]
+        {
+          title: "Intro to CSS",
+          name: "Derek",
+          price: 858
+        },
+        {
+          title: "Backend API's",
+          name: "Adam",
+          price: 112
+        },
+        {
+          title: "Intro to JavaScript",
+          name: "Chris",
+          price: 1280
+        },
+        {
+          title: "Learning SQL",
+          name: "John",
+          price: 858
+        }
       ],
       colors: [
         "gray",
