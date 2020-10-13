@@ -56,9 +56,21 @@
     <card class="my-4" heading="Countdown" :padding="false">
       <countdown :time="new Date(2021, 0, 1)"></countdown>
     </card>
-    <card class="my-4" heading="Table" :padding="false">
-      <data-table :items="tableItems"></data-table>
-    </card>
+    <div class="my-4">
+      <data-table :items="tableItems">
+        <template v-slot:title="{ item }">
+          <span class="italic text-gray-800 bold">{{ item }}</span>
+        </template>
+
+        <template v-slot:price="{ item }">
+          <badge :color="item > 700 ? 'red' : 'green'">${{ item }}</badge>
+        </template>
+
+        <template v-slot:edit>
+          <span :class="`text-${color}-500 cursor-pointer`">Edit</span>
+        </template>
+      </data-table>
+    </div>
     <card class="my-4" heading="Breadcrumbs">
       <breadcrumbs></breadcrumbs>
     </card>
@@ -288,22 +300,44 @@ export default {
         {
           title: "Intro to CSS",
           name: "Derek",
-          price: 858
+          price: 858,
+          edit: ""
         },
         {
           title: "Backend API's",
           name: "Adam",
-          price: 112
+          price: 112,
+          edit: ""
         },
         {
           title: "Intro to JavaScript",
           name: "Chris",
-          price: 1280
+          price: 1280,
+          edit: ""
         },
         {
           title: "Learning SQL",
           name: "John",
-          price: 858
+          price: 858,
+          edit: ""
+        },
+        {
+          title: "ASP",
+          name: "Joe",
+          price: 1078,
+          edit: ""
+        },
+        {
+          title: "Its GO time",
+          name: "Lee",
+          price: 645,
+          edit: ""
+        },
+        {
+          title: "Rust 101",
+          name: "Mac",
+          price: 90,
+          edit: ""
         }
       ],
       colors: [
@@ -390,7 +424,8 @@ export default {
     }, 5000);
   },
   computed: {
-    ...mapGetters("user", ["user", "isLoggedIn"])
+    ...mapGetters("user", ["user", "isLoggedIn"]),
+    ...mapGetters("theme", ["color"])
   },
   methods: {
     ...mapActions("theme", ["setColor", "setShadow", "setRounded"])
