@@ -15,6 +15,11 @@ git clone https://github.com/Leping08/saas-template-front-end
 npm install
 ```
 
+### Env
+```
+Duplicate .env.example to .env.local and set the stripe public key if payment processing is being utilized.
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
