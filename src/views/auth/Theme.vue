@@ -74,6 +74,21 @@
     <card class="my-4" heading="Breadcrumbs">
       <breadcrumbs></breadcrumbs>
     </card>
+    <card class="my-4" heading="Tooltip">
+      <tooltip
+        placement="bottom-left"
+        mode="hover"
+        :maxWidth="150"
+        :nowrap="false"
+      >
+        <template v-slot:outlet>
+          <theme-button>Hover Me</theme-button>
+        </template>
+        <template v-slot:tooltip>
+          This is the tooltop text
+        </template>
+      </tooltip>
+    </card>
     <card class="my-4" heading="Description list" :padding="false">
       <description-list :items="ListItems" :border="true"></description-list>
     </card>
@@ -193,6 +208,7 @@ import Ping from "../../components/Ping";
 import Countdown from "../../components/Countdown";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Chart from "../../components/Chart";
+import Tooltip from "../../components/Tooltip";
 export default {
   name: "Theme",
   components: {
@@ -212,7 +228,8 @@ export default {
     Ping,
     Countdown,
     Breadcrumbs,
-    Chart
+    Chart,
+    Tooltip
   },
   data() {
     return {
