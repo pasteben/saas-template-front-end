@@ -227,7 +227,7 @@
                   >
 
                   <a
-                    @click="logout()"
+                    @click="logoutTest()"
                     class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
                     role="menuitem"
                     >Logout</a
@@ -334,6 +334,12 @@ export default {
     }
   },
   methods: {
+    logoutTest() {
+      this.$http.post("/logout").then(response => {
+        console.log(response);
+        this.logout();
+      });
+    },
     ...mapActions("user", ["logout"])
   }
 };
