@@ -103,7 +103,7 @@ export default {
   props: {
     heading: {
       type: String,
-      required: true
+      required: false
     },
     modelValue: {
       type: Boolean,
