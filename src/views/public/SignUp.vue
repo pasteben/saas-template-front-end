@@ -180,12 +180,12 @@
           <div v-for="plan in product.plans" :key="plan">
             <card
               :padding="false"
-              :showHeading="false"
               class="text-center cursor-pointer"
               :class="activeClasses(plan)"
               @click="select(plan)"
               v-if="plan.time_frame === time_frame"
             >
+              <template v-slot:header></template>
               <div class="bg-white py-8 px-4">
                 <h3
                   class="inline-flex px-4 py-1 rounded-full text-sm leading-5 font-semibold tracking-wide uppercase bg-indigo-100 text-indigo-600"
@@ -273,7 +273,8 @@
 
     <div class="pb-6">
       <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <card :showHeading="false">
+        <card>
+          <template v-slot:header></template>
           <form>
             <div class="my-2">
               <theme-input
@@ -319,7 +320,14 @@
               ></credit-card>
             </div>
             <div class="mt-4">
-              <theme-button @click.prevent="submitCard()">Submit</theme-button>
+              <template v-if="!signUpLoading">
+                <theme-button @click.prevent="submitCard()"
+                  >Submit</theme-button
+                >
+              </template>
+              <template v-if="signUpLoading">
+                <loading :size="8"></loading>
+              </template>
             </div>
           </form>
         </card>
@@ -338,6 +346,7 @@ import ThemeInput from "../../components/form/Input";
 import ThemeButton from "../../components/form/Button";
 import CreditCard from "../../components/form/CreditCard";
 import router from '@/router';
+import Loading from "../../components/ProgressSpinner";
 export default {
   name: "SignUp",
   components: {
@@ -345,7 +354,8 @@ export default {
     Card,
     ThemeInput,
     ThemeButton,
-    CreditCard
+    CreditCard,
+    Loading
   },
   data() {
     return {
@@ -357,6 +367,7 @@ export default {
       password: "",
       password_confirmation: "",
       submit: false,
+      signUpLoading: false,
       cardToken: '',
       products: []
     };
@@ -381,6 +392,7 @@ export default {
       this.selectedPlan = plan;
     },
     submitCard() {
+      this.signUpLoading = true;
       this.submit = true;
       //TODO validate the form imputs
     },
@@ -402,9 +414,10 @@ export default {
         paymentMethod: this.cardToken,
         planId: this.selectedPlan.id
       }).then(response => {
-        router.push({ name: "dashboard" });
+        window.location.replace("/dashboard");
       }).catch(error => {
         console.log(error);
+        this.signUpLoading = false;
       });
     }
   },

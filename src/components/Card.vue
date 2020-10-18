@@ -63,7 +63,7 @@ export default {
     headingBorder: {
       type: Boolean,
       required: false,
-      default: true
+      default: false
     }
   },
   computed: {
