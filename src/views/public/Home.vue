@@ -917,8 +917,40 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   name: "Home",
-  components: {}
+  components: {},
+    created() {
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : 1119955541736029,
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v8.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+            FB.getLoginStatus(function(response) {
+                if (response.status == 'not_authorized') {
+                    FB.login(function(response){
+                        console.log(response)
+                    }, {scope: 'email'});
+                }
+                console.log(response);
+            });
+
+
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    },
 };
 </script>
